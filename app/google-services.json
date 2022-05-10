@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "956130629807",
+    "project_id": "logics-quiz-app",
+    "storage_bucket": "logics-quiz-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956130629807:android:b1836b10147b5ffcf29c5a",
+        "android_client_info": {
+          "package_name": "com.example.quizapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956130629807-e9k8hsdvkuh8b255o2rj7ahqp3lr2p6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx8sFODaLxuovDSI10p5e8oJ4U3Rkja1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956130629807-e9k8hsdvkuh8b255o2rj7ahqp3lr2p6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

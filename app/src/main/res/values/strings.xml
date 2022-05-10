@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Logics</string>
+    <string name="seconds_remaining">Time Remaining : %d</string>
+</resources>
