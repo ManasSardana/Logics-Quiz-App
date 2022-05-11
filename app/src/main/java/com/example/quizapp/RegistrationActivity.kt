@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.quizapp.databinding.ActivityMainBinding
 import com.example.quizapp.databinding.ActivityRegisterationBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -16,9 +17,9 @@ class RegistrationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registeration)
-        auth = FirebaseAuth.getInstance()
         registrationActivity = ActivityRegisterationBinding.inflate(layoutInflater)
+        setContentView(registrationActivity.root)
+        auth = FirebaseAuth.getInstance()
 
         //Registering the user
         registrationActivity.signUp.setOnClickListener {
@@ -40,7 +41,11 @@ class RegistrationActivity : AppCompatActivity() {
                     Snackbar.LENGTH_LONG).show()
             }
         }
+        registrationActivity.signUpLogin.setOnClickListener {
+            startActivity(Intent(this,MainActivity :: class.java))
+            }
     }
+
     private fun createAccount(email: String, confirmPassword: String) {
         auth.createUserWithEmailAndPassword(email, confirmPassword).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -52,7 +57,7 @@ class RegistrationActivity : AppCompatActivity() {
                             Toast.makeText(this,
                                 "Please Check Your Email for verification to Complete Your Registration.",
                                 Toast.LENGTH_LONG).show()
-                            startActivity(Intent(this,QuestionActivity :: class.java))
+                            startActivity(Intent(this,MainActivity :: class.java))
                         } else {
                             // If sign in fails, display a message to the user
                             if (task.exception is FirebaseAuthUserCollisionException) {

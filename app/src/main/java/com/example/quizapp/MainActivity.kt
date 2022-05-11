@@ -11,7 +11,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     //Initializing Variables
@@ -20,10 +19,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mainActivity = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainActivity.root)
         window.decorView.systemUiVisibility= View.SYSTEM_UI_FLAG_FULLSCREEN
         auth = FirebaseAuth.getInstance()
-        mainActivity = ActivityMainBinding.inflate(layoutInflater)
 
         /*if(auth.currentUser != null && auth.currentUser!!.isEmailVerified){
             startActivity(Intent(this, MainPage:: class.java))
@@ -45,14 +44,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Loading Forgot Password Fragment
-        /*mainActivity.forgetPassword.setOnClickListener {
-
+        mainActivity.loginForgot.setOnClickListener {
+            startActivity(Intent(this@MainActivity,ForgotPasswordActivity::class.java))
+            finish()
         }
 
         //Loading Registration Fragment
-        mainActivity.loginSignUp.setOnClickListener {
-
-        }*/
+        mainActivity.loginRegister.setOnClickListener {
+            startActivity(Intent(this@MainActivity,RegistrationActivity::class.java))
+            finish()
+        }
     }
     private fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)

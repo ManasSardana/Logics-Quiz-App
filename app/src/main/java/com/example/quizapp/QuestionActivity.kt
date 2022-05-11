@@ -10,12 +10,14 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_question.*
+import com.example.quizapp.databinding.ActivityMainBinding
+import com.example.quizapp.databinding.ActivityQuestionBinding
+//import kotlinx.android.synthetic.main.activity_question.*
 import kotlin.random.Random
 
 
 class QuestionActivity : AppCompatActivity() {
-
+    private lateinit var questionActivity: ActivityQuestionBinding
     private var Name: String? = null
     private var score: Int = 0
     private var maxQue: Int = 1
@@ -27,7 +29,8 @@ class QuestionActivity : AppCompatActivity() {
     private var question = questionList!![currentPosition-1]
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_question)
+        questionActivity = ActivityQuestionBinding.inflate(layoutInflater)
+        setContentView(questionActivity.root)
 
         Name = intent.getStringExtra(setData.name)
 
@@ -35,24 +38,24 @@ class QuestionActivity : AppCompatActivity() {
 
         setQuestion()
 
-        opt_1.setOnClickListener {
+        questionActivity.opt1.setOnClickListener {
 
-            selectedOptionStyle(opt_1, 1)
+            selectedOptionStyle(questionActivity.opt1, 1)
         }
-        opt_2.setOnClickListener {
+        questionActivity.opt2.setOnClickListener {
 
-            selectedOptionStyle(opt_2, 2)
+            selectedOptionStyle(questionActivity.opt2, 2)
         }
-        opt_3.setOnClickListener {
+        questionActivity.opt3.setOnClickListener {
 
-            selectedOptionStyle(opt_3, 3)
+            selectedOptionStyle(questionActivity.opt3, 3)
         }
-        opt_4.setOnClickListener {
+        questionActivity.opt4.setOnClickListener {
 
-            selectedOptionStyle(opt_4, 4)
+            selectedOptionStyle(questionActivity.opt4, 4)
         }
 
-        submit.setOnClickListener {
+        questionActivity.submit.setOnClickListener {
             if (selecedOption != 0) {
                 //val question = questionList!![currentPosition - 1]
                 if (selecedOption != question.correct_ans) {
@@ -62,12 +65,12 @@ class QuestionActivity : AppCompatActivity() {
                 }
                 setColor(question.correct_ans, R.drawable.correct_question_option)
                 if (currentPosition == 15/*questionList!!.size*/){
-                    submit.text = "FINISH"
+                    questionActivity.submit.text = "FINISH"
                     if (counterDown != null || counterDown == null) {
                         counterDown!!.cancel()
                     }
                 } else {
-                    submit.text = "Go to Next"
+                    questionActivity.submit.text = "Go to Next"
                     if (counterDown != null || counterDown == null) {
                         counterDown!!.cancel()
                     }
@@ -100,16 +103,16 @@ class QuestionActivity : AppCompatActivity() {
     fun setColor(opt: Int, color: Int) {
         when (opt) {
             1 -> {
-                opt_1.background = ContextCompat.getDrawable(this, color)
+                questionActivity.opt1.background = ContextCompat.getDrawable(this, color)
             }
             2 -> {
-                opt_2.background = ContextCompat.getDrawable(this, color)
+                questionActivity.opt2.background = ContextCompat.getDrawable(this, color)
             }
             3 -> {
-                opt_3.background = ContextCompat.getDrawable(this, color)
+                questionActivity.opt3.background = ContextCompat.getDrawable(this, color)
             }
             4 -> {
-                opt_4.background = ContextCompat.getDrawable(this, color)
+                questionActivity.opt4.background = ContextCompat.getDrawable(this, color)
             }
         }
     }
@@ -129,24 +132,24 @@ class QuestionActivity : AppCompatActivity() {
 
         setOptionStyle()
 
-        progress_bar.progress = currentPosition
-        progress_bar.max = 15 //questionList!!.size
-        progress_text.text = "${currentPosition}" + "/" + "${15}"
-        question_text.text = question.question
-        opt_1.text = question.option_one
-        opt_2.text = question.option_tw0
-        opt_3.text = question.option_three
-        opt_4.text = question.option_four
+        questionActivity.progressBar.progress = currentPosition
+        questionActivity.progressBar.max = 15 //questionList!!.size
+        questionActivity.progressText.text = "${currentPosition}" + "/" + "${15}"
+        questionActivity.questionText.text = question.question
+        questionActivity.opt1.text = question.option_one
+        questionActivity.opt2.text = question.option_tw0
+        questionActivity.opt3.text = question.option_three
+        questionActivity.opt4.text = question.option_four
         currentPosition++
         maxQue++
     }
 
     fun setOptionStyle() {
         var optionList: ArrayList<TextView> = arrayListOf()
-        optionList.add(0, opt_1)
-        optionList.add(1, opt_2)
-        optionList.add(2, opt_3)
-        optionList.add(3, opt_4)
+        optionList.add(0, questionActivity.opt1)
+        optionList.add(1, questionActivity.opt2)
+        optionList.add(2, questionActivity.opt3)
+        optionList.add(3, questionActivity.opt4)
 
         for (op in optionList) {
             op.setTextColor(Color.parseColor("#555151"))

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quizapp.databinding.ActivityForgotPasswordBinding
+import com.example.quizapp.databinding.ActivityMainBinding
 import com.example.quizapp.databinding.ActivityRegisterationBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -17,9 +18,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forgot_password)
-        auth = FirebaseAuth.getInstance()
         ForgotPasswordActivity = ActivityForgotPasswordBinding.inflate(layoutInflater)
+        setContentView(ForgotPasswordActivity.root)
+        auth = FirebaseAuth.getInstance()
 
         //Sending Password reset email
         ForgotPasswordActivity.forgotButton.setOnClickListener {
